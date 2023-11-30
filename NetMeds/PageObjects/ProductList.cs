@@ -18,6 +18,8 @@ namespace NetMeds.PageObjects
             this.driver = driver ?? throw new ArgumentNullException(nameof(driver));
             PageFactory.InitElements(driver, this);
         }
+        [FindsBy(How = How.XPath, Using = "//div[@class='logo']")]
+        public IWebElement? LogoButton { get; set; }
         public ProductPage ProductSelectClick(string position)
         {
             DefaultWait<IWebDriver> fluentWait = new(driver);
@@ -30,6 +32,10 @@ namespace NetMeds.PageObjects
             fluentWait.Until(d => driver.FindElement(By.XPath("//li[@class='ais-InfiniteHits-item'][" + intposition.ToString() + "]")).Displayed == true);
             driver.FindElement(By.XPath("//li[@class='ais-InfiniteHits-item']["+ intposition.ToString()+"]")).Click();
             return new ProductPage(driver);
+        }
+        public void LogoButtonClik()
+        {
+            LogoButton?.Click();
         }
     }
 }

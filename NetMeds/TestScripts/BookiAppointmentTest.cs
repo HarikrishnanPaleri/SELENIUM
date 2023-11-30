@@ -45,7 +45,7 @@ namespace NetMeds.TestScripts
                     Thread.Sleep(2000);
                     LogTestResult("Add to cart test", "Add to cart failed");
                     test = extent.CreateTest("Book Appointment test - Pass");
-                    test.Fail("Book appointment test passed");
+                    test.Pass("Book appointment test passed");
                 }
             }
             catch (AssertionException ex)

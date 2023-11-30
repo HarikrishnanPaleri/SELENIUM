@@ -36,6 +36,9 @@ namespace NetMeds.PageObjects
         [FindsBy(How = How.XPath, Using = "//li[2]//div[1]//div[2]//div[4]//div[1]//ul[1]//li[6]//a[1]")]
         public IWebElement? BathAndShowerLink { get; set; }
 
+        [FindsBy(How = How.ClassName, Using = "new_offers_icon")]
+        public IWebElement? OffersLink { get; set; }
+
         //Act
         public void TypePincode(string searchpin)
         {
@@ -66,6 +69,11 @@ namespace NetMeds.PageObjects
         public void BathAndShowerLinkClick()
         {
             BathAndShowerLink?.Click();
+        }
+
+        public void OffersLinkClick()
+        {
+            OffersLink?.Click();
         }
 
 

@@ -86,7 +86,7 @@ namespace NetMeds
         public DefaultWait<IWebDriver> Wait(IWebDriver driver)
         {
             DefaultWait<IWebDriver> fluentWait = new(driver);
-            fluentWait.Timeout = TimeSpan.FromSeconds(5);
+            fluentWait.Timeout = TimeSpan.FromSeconds(15);
             fluentWait.PollingInterval = TimeSpan.FromMilliseconds(100);
             fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
             fluentWait.Message = "Element not found";

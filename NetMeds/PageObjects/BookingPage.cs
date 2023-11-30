@@ -69,6 +69,16 @@ namespace NetMeds.PageObjects
 
             //CreateAccountButton?.Click();
         }
+       public void NameEnter(string name)
+        {
+            NameInput?.SendKeys(name);
+          
+        }
+        public void NumberEnter(string num)
+        {
+            MobileNumber?.SendKeys(num);
+
+        }
 
 
     }
