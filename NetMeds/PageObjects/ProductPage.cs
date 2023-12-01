@@ -24,28 +24,30 @@ namespace NetMeds.PageObjects
         public IWebElement? AddToCartButton { get; set; }
         [FindsBy(How = How.Id, Using = "minicart_btn")]
         public IWebElement? GoToCartButton { get; set; }
-
+       
+        //button[@type ='button'])[1]
         //[FindsBy(How = How.ClassName, Using = "//i[@class ='fa fa-angle-down prev']")]
         //public IWebElement? AvailabilityText { get; set; }
 
         public void AddToCartButtonClick()
         {
+            var fluentWait = CoreCodes.Wait(driver);
+            CoreCodes.ScrollIntoView(driver, driver.FindElement( By.XPath("//span[@class='pin-code-f']")));
 
-            CoreCodes.ScrollIntoView(driver, driver.FindElement( By.XPath("//div[text()='Availability & Expiry']")));
+            Thread.Sleep(500);
+          
 
-            Thread.Sleep(5000);
+            //WebDriverWait wait = new(driver, TimeSpan.FromSeconds(5));
+            //wait.Until(ExpectedConditions.ElementToBeClickable(AddToCartButton));
 
-
-            WebDriverWait wait = new(driver, TimeSpan.FromSeconds(5));
-            wait.Until(ExpectedConditions.ElementToBeClickable(AddToCartButton));
-
+            fluentWait.Until(ExpectedConditions.ElementToBeClickable(AddToCartButton));
            AddToCartButton?.Click();
         }
         public CheckoutPage GoToCartButtonClick()
         {
-           
             GoToCartButton?.Click();
             return new CheckoutPage(driver);
         }
+
     }
 }

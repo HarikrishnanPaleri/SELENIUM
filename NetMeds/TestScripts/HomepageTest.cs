@@ -30,7 +30,8 @@ namespace NetMeds.TestScripts
             {
                 driver.Navigate().GoToUrl("https://www.NetMeds.com/");
             }
-
+           
+            
 
             try
             {
@@ -39,6 +40,7 @@ namespace NetMeds.TestScripts
                 actions.MoveToElement(beauty).Build().Perform();
                 //Thread.Sleep(3000);
                 homePage.FaceMakeUpClick();
+                TakeScreenshot();
                 Assert.That(driver.Url.Contains("face-makeup"));
                 LogTestResult("Beauty Link Test", "Beauty Link Test passed");
                 test = extent.CreateTest("Beauty link Test - Pass");
@@ -72,6 +74,7 @@ namespace NetMeds.TestScripts
                 actions.MoveToElement(wellness).Build().Perform();
                 //Thread.Sleep(3000);
                 homePage.BathAndShowerLinkClick();
+                TakeScreenshot();
                 Assert.That(driver.Url.Contains("bath-shower"));
                 LogTestResult("Wellness Link Test", "Wellness Link Test passed");
                 test = extent.CreateTest("Wellness link Test - Pass");
@@ -111,6 +114,7 @@ namespace NetMeds.TestScripts
                     string? getSearchText = searchData.searchText;
                     homePage.TypeSearch(getSearchText);
                     Log.Information("Search text entered");
+                   
                     TakeScreenshot();
                     Assert.That(driver.Url.Contains("vicks"));
                     LogTestResult("Search function test", "Search function test passed");
@@ -139,6 +143,7 @@ namespace NetMeds.TestScripts
                 homePage.OffersLinkClick();
                 Log.Information("Offers Link clicked");
                 Assert.That(driver.Url.Contains("offers"));
+                TakeScreenshot() ;
                 LogTestResult("Offers link test", "Offers link test passed");
                 test = extent.CreateTest("offers link Test - Pass");
                 test.Pass("offers link test passed");
@@ -177,6 +182,7 @@ namespace NetMeds.TestScripts
                     //fluentWait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[@id='delivery_details']//span")));
                     //fluentWait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//div[@id='container_div10'][1])")));
                     Assert.That(driver.FindElement(By.XPath("//span[@id='delivery_details']//span")).Text.Equals(getPincode));
+                    TakeScreenshot();
 
                     LogTestResult("Pincode change test", "Pincode change test passed");
                     test = extent.CreateTest("Pincode Change Test - Pass");
@@ -192,7 +198,7 @@ namespace NetMeds.TestScripts
             }
 
         }
-        [Test, Order(5), Category("Smoke Test")]
+        [Test, Order(6), Category("Smoke Test")]
         public void InvalidPincodeTest()
         {
             
@@ -205,7 +211,9 @@ namespace NetMeds.TestScripts
             try {
                 homepage.TypePincode("465678");
                 var fluentWait = Wait(driver);
+                TakeScreenshot();
                 Assert.That(fluentWait.Until(d=> driver.FindElement(By.Id("rel_pin_msg")).Text.Equals("invalid pincode")));
+
                 LogTestResult("Invalid Pincode Test", "Invalid Pincode test passed");
                 test = extent.CreateTest("Invalid pincode test - pass");
                 test.Pass("Invalid Pincode test passed");
@@ -221,8 +229,54 @@ namespace NetMeds.TestScripts
                 }
 
             }
+        [Test, Order(7), Category("Smoke Test")]
+        public void ALlLinksStatusTest()
+        {
 
+            if (!driver.Url.Equals("https://www.NetMeds.com/"))
+            {
+                driver.Navigate().GoToUrl("https://www.NetMeds.com/");
+
+            }
+            List<IWebElement> allLinks = driver.FindElements(By.TagName("a")).ToList();
+            try
+            {
+                foreach (var link in allLinks)
+                {
+                    string url = link.GetAttribute("href");
+                    if (url == null)
+                    {
+                        Log.Information("Url is null");
+                        continue;
+                    }
+                    else
+                    {
+                        bool isWorking = CheckLinkStatus(url);
+                        if (isWorking)
+                        {
+                            Log.Information(url + " is working");
+                        }
+                        else
+                        {
+                            Log.Information(url + " is not working");
+                        }
+                       
+                }
+                   
+                }
+                LogTestResult("All link test", "All link test Passed");
+                test = extent.CreateTest("All link test - fail");
+                test.Fail("All link test failed");
+            }
+            catch(AssertionException ex)
+            {
+                LogTestResult("All link test", "All link test failed", ex.Message);
+                test = extent.CreateTest("All link test - fail");
+                test.Fail("All link test failed");
+
+            }
         }
+    }
     }
 
 

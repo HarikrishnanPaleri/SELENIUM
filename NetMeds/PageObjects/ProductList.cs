@@ -20,6 +20,20 @@ namespace NetMeds.PageObjects
         }
         [FindsBy(How = How.XPath, Using = "//div[@class='logo']")]
         public IWebElement? LogoButton { get; set; }
+       
+        
+        [FindsBy(How = How.XPath, Using = "//div[@Id='sort_container']//following::button[contains(text(),'Discount')]")]
+
+    
+        public IWebElement? Discount { get; set; }
+        //input[@type='checkbox'])[2]
+        [FindsBy(How = How.XPath, Using = " (//input[@type='checkbox'])[2]")]
+         public IWebElement? Checkbox { get; set; }
+
+
+
+
+
         public ProductPage ProductSelectClick(string position)
         {
             DefaultWait<IWebDriver> fluentWait = new(driver);
@@ -36,6 +50,15 @@ namespace NetMeds.PageObjects
         public void LogoButtonClik()
         {
             LogoButton?.Click();
+        }
+
+        public void SortByDiscountButtonClick()
+        {
+            Discount?.Click();
+        }
+        public void CheckboxClick()
+        {
+            Checkbox?.Click();
         }
     }
 }

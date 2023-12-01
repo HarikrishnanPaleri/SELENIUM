@@ -36,40 +36,28 @@ namespace NetMeds.TestScripts
                     string? getPincode = searchData.Pincode;
                     homePage.TypePincode(getPincode);
                     //fluentWait.Until(d => d.FindElement(By.XPath("//span[@id='delivery_details']"))).Equals(getPincode);
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     string? getSearchText = fluentWait.Until(d => searchData.searchText);
                     var productlist = homePage.TypeSearch(getSearchText);
                     Log.Information(driver.Url);
-                    // Thread.Sleep(3000);
                     TakeScreenshot();
-                  //  Assert.That(driver.Url.Contains("vicks"));
                     string? productposition = searchData.SearchPosition;
-                    
                     var productpage = productlist.ProductSelectClick(productposition);
                     Log.Information("clicked product number 4");
-                   // Thread.Sleep(3000);
                     TakeScreenshot();
-                   // Assert.That(driver.Url.Contains("vaporub"));
-
+                    Thread.Sleep(1000);
                     productpage.AddToCartButtonClick();
                     Log.Information("Add to cart button clicked");
-                    //Thread.Sleep(3000);
-
-
                     var checkoutpage = productpage.GoToCartButtonClick();
                     Thread.Sleep(2000);
                     Log.Information("Go to cart button clicked");
                     TakeScreenshot();
                     fluentWait.Until(d => driver.Url.Contains("cart"));
-                    //Assert.That(driver.Url.Contains("cart"));
-                    
                     var signuppage = checkoutpage.CheckoutButtonClick();
                     signuppage.EnterMobileNo();
                     Log.Information("Proceed button clicked");
                     TakeScreenshot();
-                    
                     Assert.That(driver.Url.Contains("account"));
-                   // Thread.Sleep(2000);
                     test = extent.CreateTest("Add to cart Test - Pass");
                     test.Pass("Add to cart link failed");
                }
@@ -81,20 +69,7 @@ namespace NetMeds.TestScripts
                 test.Fail("Add to cart Link failed");
 
             }
-                
-
-               
-                
-                //var productpage = searchpage.ClickProduct(getProduct);
-                //List<string> lstwindow = driver.WindowHandles.ToList();
-                //driver.SwitchTo().Window(lstwindow[1]);
-                //Thread.Sleep(2000);
-                //productpage.ClickSize();
-                //productpage.ClickAddToCart();
-                //string urllink = productpage.GetTitle();
-                //Thread.Sleep(2000);
-                //Assert.That(urllink, Is.EqualTo(driver.FindElement(By.XPath("//a[contains(text(),'BRG9')]")).GetAttribute("href")));
-
+         
             }
 
         }

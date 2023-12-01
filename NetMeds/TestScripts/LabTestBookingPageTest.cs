@@ -24,6 +24,7 @@ namespace NetMeds.TestScripts
             try { 
 
                 bookingPage.NameEnter("@13adf");
+                TakeScreenshot();
                 Assert.That(fluentWait.Until(d => driver.FindElement(By.XPath("//div[@id ='fname-input-error']")).Text.Equals("Your Name must contain only alphabets!")));
                 LogTestResult("Invalid Name test", "Invalid Name test passed");
                 test = extent.CreateTest("Invalid Name test Test - Pass");
@@ -50,6 +51,7 @@ namespace NetMeds.TestScripts
             {
 
                 bookingPage.NumberEnter("123445");
+                TakeScreenshot();
                 Assert.That(fluentWait.Until(d => driver.FindElement(By.XPath("//div[@class ='form_error']")).Text.Equals("Please enter a valid Mobile number!")));
                 Thread.Sleep(1000);
                 LogTestResult("Invalid Mobilenumber test", "Invalid Mobilenumber test passed");
@@ -63,5 +65,6 @@ namespace NetMeds.TestScripts
                 test.Fail("Invalid MobileNumber test failed");
             }
         }
+       
     }
 }

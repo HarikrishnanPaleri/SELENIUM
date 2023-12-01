@@ -83,12 +83,14 @@ namespace NetMeds
                 return false;
             }
         }
-        public DefaultWait<IWebDriver> Wait(IWebDriver driver)
+        public  static DefaultWait<IWebDriver> Wait(IWebDriver driver)
         {
             DefaultWait<IWebDriver> fluentWait = new(driver);
             fluentWait.Timeout = TimeSpan.FromSeconds(15);
             fluentWait.PollingInterval = TimeSpan.FromMilliseconds(100);
             fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            fluentWait.IgnoreExceptionTypes(typeof(ElementClickInterceptedException));
+            
             fluentWait.Message = "Element not found";
             return fluentWait;
         }

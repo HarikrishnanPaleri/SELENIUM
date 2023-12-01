@@ -55,7 +55,7 @@ namespace NetMeds.PageObjects
             SelectElement selectPackage = new(Drop1);
             selectPackage.SelectByValue("Aarogyam C");
           
-            Thread.Sleep(2000);
+            //Thread.Sleep(2000);
 
             Drop2?.SendKeys("Diabetes");
             Drop2.SendKeys(Keys.Enter);
@@ -63,7 +63,7 @@ namespace NetMeds.PageObjects
             //selectPackage.SelectByValue("Diabetes");
             Terms?.Click();
             Bookbuton?.Click();
-            Thread.Sleep(2000);
+           // Thread.Sleep(2000);
 
 
 
