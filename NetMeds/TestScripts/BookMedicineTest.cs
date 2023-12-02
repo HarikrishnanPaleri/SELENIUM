@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Serilog;
 using OpenQA.Selenium.Support.UI;
 using System.Security.Policy;
+using SeleniumExtras.WaitHelpers;
 
 namespace NetMeds.TestScripts
 {
@@ -36,28 +37,31 @@ namespace NetMeds.TestScripts
                     string? getPincode = searchData.Pincode;
                     homePage.TypePincode(getPincode);
                     //fluentWait.Until(d => d.FindElement(By.XPath("//span[@id='delivery_details']"))).Equals(getPincode);
-                    Thread.Sleep(500);
+                    //Thread.Sleep(500);
+                    fluentWait.Until(ExpectedConditions.ElementToBeClickable(homePage.DelivryDropDown));
                     string? getSearchText = fluentWait.Until(d => searchData.searchText);
                     var productlist = homePage.TypeSearch(getSearchText);
-                    Log.Information(driver.Url);
+                    //Log.Information(driver.Url);
                     TakeScreenshot();
                     string? productposition = searchData.SearchPosition;
                     var productpage = productlist.ProductSelectClick(productposition);
-                    Log.Information("clicked product number 4");
+                    Log.Information("clicked a product");
                     TakeScreenshot();
-                    Thread.Sleep(1000);
+                    //Thread.Sleep(1000);
+                    fluentWait.Until(ExpectedConditions.ElementToBeClickable(productpage.AddToCartButton));
                     productpage.AddToCartButtonClick();
                     Log.Information("Add to cart button clicked");
                     var checkoutpage = productpage.GoToCartButtonClick();
-                    Thread.Sleep(2000);
+                    //Thread.Sleep(2000);
                     Log.Information("Go to cart button clicked");
                     TakeScreenshot();
-                    fluentWait.Until(d => driver.Url.Contains("cart"));
+                    fluentWait.Until(ExpectedConditions.ElementToBeClickable(checkoutpage.CheckoutButton));
                     var signuppage = checkoutpage.CheckoutButtonClick();
                     signuppage.EnterMobileNo();
                     Log.Information("Proceed button clicked");
                     TakeScreenshot();
                     Assert.That(driver.Url.Contains("account"));
+                    LogTestResult("Add to cart E2E test", "Add to cart E2E test- passed");
                     test = extent.CreateTest("Add to cart Test - Pass");
                     test.Pass("Add to cart link failed");
                }

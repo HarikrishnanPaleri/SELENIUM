@@ -24,7 +24,6 @@ namespace NetMeds.PageObjects
         
         [FindsBy(How = How.XPath, Using = "//div[@Id='sort_container']//following::button[contains(text(),'Discount')]")]
 
-    
         public IWebElement? Discount { get; set; }
         //input[@type='checkbox'])[2]
         [FindsBy(How = How.XPath, Using = " (//input[@type='checkbox'])[2]")]

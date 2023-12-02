@@ -1,6 +1,7 @@
 ﻿using NetMeds.PageObjects;
 using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace NetMeds.TestScripts
             try
             {
                 prodPage.LogoButtonClik();
+                Log.Information("Logo button clicked");
                 TakeScreenshot();
                 Assert.That(fluentWait.Until(d => driver.Url.Equals("https://www.netmeds.com/")));
                 LogTestResult("Netmeds Icon test", "Netmeds Icon  test passed");
@@ -50,6 +52,7 @@ namespace NetMeds.TestScripts
             {
                 var prodPage = new ProductList(driver);
                 prodPage.SortByDiscountButtonClick();
+                Log.Information("Discount button clicked");
                 TakeScreenshot();
                 Assert.That(driver.FindElement(By.XPath("//span[@class='save-badge']")).Text.Contains("% OFF"));
                 LogTestResult("Sort By Discount test", "Sort By Discount test pass");
@@ -79,7 +82,8 @@ namespace NetMeds.TestScripts
                 //Thread.Sleep(1000);
                 fluentWait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//input[@type='checkbox'])[2]")));
                 prodPage.CheckboxClick();
-                Thread.Sleep(1000);
+                Log.Information("Checkbox clicked");
+                //Thread.Sleep(1000);
                 TakeScreenshot();
                 Assert.That(driver.FindElement(By.XPath("//span[@class='clsgetname']")).Text.Contains("Kofol"));
                 LogTestResult("Check box test", "Checkbox test pass");

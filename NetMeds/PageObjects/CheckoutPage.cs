@@ -26,7 +26,6 @@ namespace NetMeds.PageObjects
         {
             
             CoreCodes.ScrollIntoView(driver, CheckoutButton);
-             //Thread.Sleep(3000);
             CheckoutButton.Click();
             return new SignupPage(driver);
         }

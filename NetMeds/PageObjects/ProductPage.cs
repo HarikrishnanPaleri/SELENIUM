@@ -33,8 +33,8 @@ namespace NetMeds.PageObjects
         {
             var fluentWait = CoreCodes.Wait(driver);
             CoreCodes.ScrollIntoView(driver, driver.FindElement( By.XPath("//span[@class='pin-code-f']")));
-
-            Thread.Sleep(500);
+            
+            //Thread.Sleep(500);
           
 
             //WebDriverWait wait = new(driver, TimeSpan.FromSeconds(5));

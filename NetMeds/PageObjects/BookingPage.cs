@@ -50,8 +50,7 @@ namespace NetMeds.PageObjects
             CoreCodes.ScrollIntoView(driver, driver.FindElement(By.Id("fname-input")));
             Thread.Sleep(2000);
             Drop1?.Click();
-            //Thread.Sleep(1000);
-            //Thread.Sleep(1000);
+            
             SelectElement selectPackage = new(Drop1);
             selectPackage.SelectByValue("Aarogyam C");
           
@@ -76,6 +75,7 @@ namespace NetMeds.PageObjects
         }
         public void NumberEnter(string num)
         {
+           
             MobileNumber?.SendKeys(num);
 
         }

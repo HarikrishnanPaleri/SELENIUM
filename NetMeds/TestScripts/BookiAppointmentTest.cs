@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Serilog;
+using SeleniumExtras.WaitHelpers;
 
 namespace NetMeds.TestScripts
 {
@@ -42,7 +43,7 @@ namespace NetMeds.TestScripts
                     Assert.That(driver.Url.Contains("health-packages"));
                     
                     bookingPage.BookingDetails(bookingname, mobile, getPincode);
-                    Thread.Sleep(2000);
+                    //Thread.Sleep(2000);
                     LogTestResult("Add to cart test", "Add to cart failed");
                     test = extent.CreateTest("Book Appointment test - Pass");
                     test.Pass("Book appointment test passed");

@@ -26,6 +26,7 @@ namespace NetMeds.PageObjects
         public IWebElement? SearchPincode { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//input[@id ='search']")]
+        [CacheLookup]
         public IWebElement? Searchtext { get; set; }
         [FindsBy(How = How.XPath, Using = "(//a[text()='Lab Tests'][1])")]
         public IWebElement? LabTestLink { get; set; }
@@ -49,7 +50,7 @@ namespace NetMeds.PageObjects
         public ProductList TypeSearch(string searchTerm)
         {
             Searchtext?.SendKeys(searchTerm);
-            //Thread.Sleep(5000);
+            
             Searchtext?.SendKeys(Keys.Enter);
             return new ProductList(driver);
 

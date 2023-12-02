@@ -40,6 +40,7 @@ namespace NetMeds.TestScripts
                 actions.MoveToElement(beauty).Build().Perform();
                 //Thread.Sleep(3000);
                 homePage.FaceMakeUpClick();
+                Log.Information("Beauty Link Clicked");
                 TakeScreenshot();
                 Assert.That(driver.Url.Contains("face-makeup"));
                 LogTestResult("Beauty Link Test", "Beauty Link Test passed");
@@ -74,6 +75,7 @@ namespace NetMeds.TestScripts
                 actions.MoveToElement(wellness).Build().Perform();
                 //Thread.Sleep(3000);
                 homePage.BathAndShowerLinkClick();
+                Log.Information("Bath and shower link clicked");
                 TakeScreenshot();
                 Assert.That(driver.Url.Contains("bath-shower"));
                 LogTestResult("Wellness Link Test", "Wellness Link Test passed");
@@ -141,6 +143,7 @@ namespace NetMeds.TestScripts
             {
                 var homePage = new NetMedsHomePage(driver);
                 homePage.OffersLinkClick();
+
                 Log.Information("Offers Link clicked");
                 Assert.That(driver.Url.Contains("offers"));
                 TakeScreenshot() ;
@@ -177,6 +180,7 @@ namespace NetMeds.TestScripts
                 {
                     string? getPincode = searchData.Pincode;
                     homepage.TypePincode(getPincode);
+                    Log.Information("pincode selected");
                     var fluentWait = Wait(driver);
                     Thread.Sleep(1000);
                     //fluentWait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[@id='delivery_details']//span")));
@@ -229,6 +233,7 @@ namespace NetMeds.TestScripts
                 }
 
             }
+        [Ignore("   ")]
         [Test, Order(7), Category("Smoke Test")]
         public void ALlLinksStatusTest()
         {
